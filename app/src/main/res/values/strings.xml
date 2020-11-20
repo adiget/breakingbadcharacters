@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Characters</string>
+    <string name="loading_error">An error occurred while loading the characters</string>
+    <string name="retry">Retry</string>
+    <string name="status_label">Status: </string>
+    <string name="occupation_label">Occupation: </string>
+    <string name="season_appearance_label">Season Appearance: </string>
+    <string name="search">search</string>
+    <string name="menu_filter">Seasons</string>
+    <string name="seasons_all">All Seasons</string>
+    <string name="season_one">Season 1</string>
+    <string name="season_two">Season 2</string>
+    <string name="season_three">Season 3</string>
+    <string name="seasons_four">Season 4</string>
+    <string name="seasons_five">Season 5</string>
+</resources>

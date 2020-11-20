@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/seasons_all"
+        android:title="@string/seasons_all" />
+    <item
+        android:id="@+id/season_one"
+        android:title="@string/season_one" />
+    <item
+        android:id="@+id/season_two"
+        android:title="@string/season_two" />
+    <item
+        android:id="@+id/season_three"
+        android:title="@string/season_three" />
+    <item
+        android:id="@+id/seasons_four"
+        android:title="@string/seasons_four" />
+    <item
+        android:id="@+id/seasons_five"
+        android:title="@string/seasons_five" />
+</menu>
