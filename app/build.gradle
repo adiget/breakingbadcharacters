@@ -85,8 +85,9 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     testImplementation 'junit:junit:4.+'
-    testImplementation "org.mockito:mockito-inline:2.8.47"
+    //testImplementation "org.mockito:mockito-inline:2.8.47"
     testImplementation "io.mockk:mockk:1.10.2"
+    testImplementation "com.google.truth:truth:1.0"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

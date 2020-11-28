@@ -1,9 +1,11 @@
-package com.ags.annada.characters.characters
+package com.ags.annada.characters.main
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.ags.annada.characters.datasource.network.api.ApiService
 import com.ags.annada.characters.datasource.room.CharactersDatabase
 import com.ags.annada.characters.datasource.room.entities.CharacterItem
+import com.ags.annada.characters.utils.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -13,14 +15,15 @@ import javax.inject.Singleton
 class CharactersRepository @Inject constructor(
     private val database: CharactersDatabase,
     private val apiService: ApiService,
-    private val ioDispatcher: CoroutineDispatcher) {
+    private val ioDispatcher: CoroutineDispatcher
+) {
+    private val _items = database.characterDao().observeCharacters()
+    val item: LiveData<Result<List<CharacterItem>>> = Transformations.map(_items) {
+        Result.Success(it)
+    }
 
     fun getCharacterWithId(charId: Int): LiveData<CharacterItem> {
         return database.characterDao().getCharacterWithId(charId)
-    }
-
-    fun observeCharacters(): LiveData<List<CharacterItem>> {
-        return database.characterDao().observeCharacters()
     }
 
     suspend fun refreshCharacters() {

@@ -1,14 +1,15 @@
 package com.ags.annada.characters
 
 import androidx.lifecycle.LiveData
-import com.ags.annada.characters.characters.CharactersRepository
 import com.ags.annada.characters.datasource.network.api.ApiService
 import com.ags.annada.characters.datasource.room.CharactersDatabase
 import com.ags.annada.characters.datasource.room.daos.CharacterDao
 import com.ags.annada.characters.datasource.room.entities.CharacterItem
+import com.ags.annada.characters.main.CharactersRepository
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.verify
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +25,7 @@ class CharactersRepositoryTest {
     @MockK
     lateinit var mockApiService: ApiService
 
-    @MockK
+    @RelaxedMockK
     lateinit var mockDao: CharacterDao
 
     @MockK

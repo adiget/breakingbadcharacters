@@ -1,4 +1,4 @@
-package com.ags.annada.characters.characters
+package com.ags.annada.characters.main
 
 enum class SeasonNumber {
     ALL_SEASONS,

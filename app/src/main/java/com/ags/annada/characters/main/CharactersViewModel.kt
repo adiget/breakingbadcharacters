@@ -1,12 +1,15 @@
-package com.ags.annada.characters.characters
+package com.ags.annada.characters.main
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.ags.annada.characters.R
 import com.ags.annada.characters.datasource.room.entities.CharacterItem
 import com.ags.annada.characters.utils.Event
+import com.ags.annada.characters.utils.Result
 import kotlinx.coroutines.launch
 import java.util.*
+
 
 class CharactersViewModel @ViewModelInject constructor(
     private val repository: CharactersRepository,
@@ -29,7 +32,7 @@ class CharactersViewModel @ViewModelInject constructor(
             }
         }
 
-        repository.observeCharacters().distinctUntilChanged().switchMap { filterCharacters(it) }
+        repository.item.distinctUntilChanged().switchMap { filterCharacters(it) }
     }
 
     val items: LiveData<List<CharacterItem>> = _items
@@ -40,6 +43,10 @@ class CharactersViewModel @ViewModelInject constructor(
     private val _currentFilteringLabel = MutableLiveData<String>()
     val currentFilteringLabel: LiveData<String> = _currentFilteringLabel
 
+    private val _snackbarText = MutableLiveData<Event<Int>>()
+    val snackbarText: LiveData<Event<Int>> = _snackbarText
+
+    val isDataLoadingError = MutableLiveData<Boolean>()
 
     init {
         _currentFilteringLabel.value = SeasonNumber.ALL_SEASONS.toString()
@@ -50,15 +57,26 @@ class CharactersViewModel @ViewModelInject constructor(
         _selectItemEvent.value = Event(item.char_id)
     }
 
-    private fun loadCharacters(forceUpdate: Boolean) {
+    fun loadCharacters(forceUpdate: Boolean) {
         _forceUpdate.value = forceUpdate
     }
 
-    private fun filterCharacters(characters: List<CharacterItem>): LiveData<List<CharacterItem>> {
+    private fun showSnackbarMessage(message: Int) {
+        _snackbarText.value = Event(message)
+    }
+
+    private fun filterCharacters(charactersResult: Result<List<CharacterItem>>): LiveData<List<CharacterItem>> {
         val result = MutableLiveData<List<CharacterItem>>()
 
-        viewModelScope.launch {
-            result.value = filterItems(characters)
+        if (charactersResult is Result.Success) {
+            isDataLoadingError.value = false
+            viewModelScope.launch {
+                result.value = filterItems(charactersResult.data)
+            }
+        } else {
+            result.value = emptyList()
+            showSnackbarMessage(R.string.loading_characters_error)
+            isDataLoadingError.value = true
         }
 
         return result

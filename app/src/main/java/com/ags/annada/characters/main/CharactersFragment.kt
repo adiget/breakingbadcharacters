@@ -1,4 +1,4 @@
-package com.ags.annada.characters.characters
+package com.ags.annada.characters.main
 
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +13,7 @@ import com.ags.annada.characters.R
 import com.ags.annada.characters.databinding.FragmentCharactersBinding
 import com.ags.annada.characters.datasource.room.entities.CharacterItem
 import com.ags.annada.characters.utils.EventObserver
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -42,6 +43,7 @@ class CharactersFragment : Fragment() {
 
         binding.lifecycleOwner = this.viewLifecycleOwner
 
+        setupSnackbar()
         setupNavigation()
         setupAdapter()
     }
@@ -105,6 +107,13 @@ class CharactersFragment : Fragment() {
         } else {
             Log.d("setupAdapter()", "ViewModel not initialized when attempting to set up adapter.")
         }
+    }
+
+    private fun setupSnackbar() {
+        viewModel.snackbarText.observe(viewLifecycleOwner, EventObserver {
+            context?.getString(it)
+                ?.let { view?.let { it1 -> Snackbar.make(it1, it, Snackbar.LENGTH_SHORT).show() } }
+        })
     }
 
     private fun setupNavigation() {

@@ -3,7 +3,7 @@ package com.ags.annada.characters.utils
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ags.annada.characters.characters.CharactersAdapter
+import com.ags.annada.characters.main.CharactersAdapter
 import com.ags.annada.characters.datasource.room.entities.CharacterItem
 import com.squareup.picasso.Picasso
 

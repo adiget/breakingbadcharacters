@@ -4,9 +4,8 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.ags.annada.characters.characters.CharactersRepository
+import com.ags.annada.characters.main.CharactersRepository
 import com.ags.annada.characters.datasource.room.entities.CharacterItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

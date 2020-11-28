@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.ags.annada.characters.characters.CharactersViewModel" />
+            type="com.ags.annada.characters.main.CharactersViewModel" />
 
         <variable
             name="item"
